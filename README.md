@@ -165,7 +165,7 @@ SELECT *
 FROM netflix
 WHERE casts LIKE '%Salman Khan%'
   AND release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10;
-  
+  ```
 **--14.Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India**
 ```sql
 SELECT 
