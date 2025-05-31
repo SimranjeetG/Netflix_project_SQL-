@@ -26,7 +26,7 @@ description VARCHAR(250)
 );
 ```
 ## Problems and Queries
---1.Count the Number of Movies vs TV Shows
+**--1.Count the Number of Movies vs TV Shows**
 ```sql  
 SELECT 
     type,
@@ -35,7 +35,7 @@ FROM netflix
 GROUP BY type;
 ```
 
---2.Find the Most Common Rating for Movies and TV Shows
+**--2.Find the Most Common Rating for Movies and TV Shows**
 ```sql
 WITH RatingCounts AS (
     SELECT 
@@ -60,14 +60,14 @@ FROM RankedRatings
 WHERE rank = 1;
 ```
 
---3.List All Movies Released in a Specific Year (e.g., 2020)
+**--3.List All Movies Released in a Specific Year (e.g., 2020)**
 ```sql
 SELECT * 
 FROM netflix
 WHERE release_year = 2020;
 ```
 
---4.Find the Top 5 Countries with the Most Content on Netflix
+**--4.Find the Top 5 Countries with the Most Content on Netflix**
 ```sql
 SELECT * 
 FROM
@@ -83,7 +83,7 @@ ORDER BY total_content DESC
 LIMIT 5;
 ```
 
---5.Identify the Longest Movie
+**--5.Identify the Longest Movie**
 ```sql
 SELECT 
     *
@@ -92,14 +92,14 @@ WHERE type = 'Movie'
 ORDER BY SPLIT_PART(duration, ' ', 1)::INT DESC;
 ```
 
---6.Find Content Added in the Last 5 Years
+**--6.Find Content Added in the Last 5 Years**
 ```sql
 SELECT *
 FROM netflix
 WHERE TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years';
 ```
 
---7.Find All Movies/TV Shows by Director 'Rajiv Chilaka'
+**--7.Find All Movies/TV Shows by Director 'Rajiv Chilaka'**
 ```sql
 SELECT *
 FROM (
@@ -111,7 +111,7 @@ FROM (
 WHERE director_name = 'Rajiv Chilaka';
 ```
 
---8.List All TV Shows with More Than 5 Seasons
+**--8.List All TV Shows with More Than 5 Seasons**
 ```sql
 SELECT *
 FROM netflix
@@ -119,7 +119,7 @@ WHERE type = 'TV Show'
   AND SPLIT_PART(duration, ' ', 1)::INT > 5;
 ```
   
---9.Count the Number of Content Items in Each Genre
+**--9.Count the Number of Content Items in Each Genre**
 ```sql
 SELECT 
     UNNEST(STRING_TO_ARRAY(listed_in, ',')) AS genre,
@@ -128,7 +128,7 @@ FROM netflix
 GROUP BY 1;
 ```
 
---10.Find Each Year and the Average Number of Content Released in India
+**--10.Find Each Year and the Average Number of Content Released in India**
 ```sql
 SELECT 
     country,
@@ -145,28 +145,28 @@ ORDER BY avg_release DESC
 LIMIT 5;
 ```
 
---11.List All Movies that are Documentaries
+**--11.List All Movies that are Documentaries**
 ```sql
 SELECT * 
 FROM netflix
 WHERE listed_in LIKE '%Documentaries';
 ```
 
---12.Find All Content Without a Director
+**--12.Find All Content Without a Director**
 ```sql
 SELECT * 
 FROM netflix
 WHERE director IS NULL;
 ```
 
---13.Find How Many Movies Actor 'Salman Khan' Appeared in the Last 10 Years
+**--13.Find How Many Movies Actor 'Salman Khan' Appeared in the Last 10 Years**
 ```sql
 SELECT * 
 FROM netflix
 WHERE casts LIKE '%Salman Khan%'
   AND release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10;
   
---14.Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India
+**--14.Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India**
 ```sql
 SELECT 
     UNNEST(STRING_TO_ARRAY(casts, ',')) AS actor,
@@ -178,7 +178,7 @@ ORDER BY COUNT(*) DESC
 LIMIT 10;
 ```
 
---15.Categorize Content Based on the Presence of 'Kill' and 'Violence' Keywords
+**--15.Categorize Content Based on the Presence of 'Kill' and 'Violence' Keywords**
 ```sql
 SELECT 
     category,
@@ -194,7 +194,7 @@ FROM (
 GROUP BY category;
 ```
 
---16.Identify the Month with the Highest Number of Content Additions
+**--16.Identify the Month with the Highest Number of Content Additions**
 ```sql
 SELECT 
     TO_CHAR(TO_DATE(date_added, 'Month DD, YYYY'), 'Month') AS month_name,
@@ -210,7 +210,7 @@ ORDER BY
 LIMIT 1;
 ```
 
---17.List the Top 5 Genres with the Most TV Shows
+**--17.List the Top 5 Genres with the Most TV Shows**
 ```sql
 SELECT 
     listed_in AS genre,
@@ -226,7 +226,7 @@ ORDER BY
 LIMIT 5;
 ```
 
---18.Calculate the Average Duration of Movies by Genre
+**--18.Calculate the Average Duration of Movies by Genre**
 ```sql
 SELECT 
     listed_in AS genre,
@@ -242,7 +242,7 @@ ORDER BY
     avg_duration_minutes DESC;
 ```
 	
---19.List Content Where the Description Mentions “Based on a True Story”
+**--19.List Content Where the Description Mentions “Based on a True Story”**
 ```sql
 SELECT 
     show_id,
@@ -255,7 +255,7 @@ WHERE
     description ILIKE '%based on a true story%';
 ```
 	
---20Identify the Number of Unique Directors and How Many Shows Each Directed
+**--20Identify the Number of Unique Directors and How Many Shows Each Directed**
 ```sql
 SELECT 
     director,
