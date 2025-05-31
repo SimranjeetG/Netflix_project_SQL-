@@ -8,7 +8,7 @@ The objective of this project is to analyze Netflix's content database using SQL
 The data for this project is sourced from the Kaggle dataset.
 
 ## Schema
-'''sql
+```sql
 CREATE TABLE netflix 
 ( 
 show_id	VARCHAR(6),
@@ -24,7 +24,7 @@ duration VARCHAR(15),
 listed_in VARCHAR(150),
 description VARCHAR(250)
 );
-'''
+```
 
 
 
